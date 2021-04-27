@@ -1233,6 +1233,14 @@ Pin.sendMessage(from, hasil, text, {
 break
 
 
+         case 'info1':
+					me = Pin.user
+					uptime = process.uptime()
+					teks = `*Nome do bot* : ${me.name}\n*Número do bot* : @${me.jid.split('@')[0]}\n*Prefixo* : ${prefix}\n*Contatos bloqueados* : ${blocked.length}\n*O bot está ativo em* : ${kyun(uptime)}\n\n*Digite .dono para ver a info do dono*`
+					buffer = await getBuffer(me.imgUrl)
+					Pin.sendMessage(from, buffer, image, {caption: teks, contextInfo:{mentionedJid: [me.jid]}})
+					break
+
 
 //--arti nama
 
@@ -2448,7 +2456,7 @@ case 'plaquinha':
 	 buffer = await getBuffer(`https://restioas.sirv.com/Spins/artworks-000056121029-geglen-t500x500.jpg?text.0.text=${teks}&text.0.position.gravity=west&text.0.position.x=16%25&text.0.size=34&text.0.color=140f15&text.0.opacity=64&text.0.font.family=Yellowtai&text.0.font.weight=700&text.0.background.opacity=94&text.0.outline.color=0a0a0a&text.0.outline.opacity=42%22%20width=%22500%22%20height=%22500%22%20alt=`)
 	 Pin.sendMessage(from, buffer, image, {quoted: mek, caption: '*Se usou deve uma mamada no supra*'})
 	 break
-
+	 
  
  
  case 'qrcode':
@@ -4058,7 +4066,7 @@ case 'vidtik':
  case 'shirt':
     buffer = await getBuffer(`https://api.xteam.xyz/shitpost?APIKEY=63b3e16b23026b82`)
     Pin.sendMessage(from, buffer, video, {mimetype: 'video/mp4',quoted: mek})
- 
+     break
 
 case 'dono':
 	memein = await kagApi.memeindo()
@@ -4071,7 +4079,21 @@ case 'blackpink':
 	buffer = await getBuffer(`https://lolhuman.herokuapp.com/api/random/blackpink?apikey=f71a26d3b2cdb3dd772c43bf`)
 	Pin.sendMessage(from, buffer, image, {quoted: mek, caption: 'Amo blackpink ❤🥺 ️'})
 	break
-	
+
+case 'wallpaper1':
+     memein = await kagApi.memeindo()
+	 buffer = await getBuffer(`https://api.xteam.xyz/randomimage/wallpaper?APIKEY=63b3e16b23026b82`)
+	 Pin.sendMessage(from, buffer, image, {quoted: mek, caption: '*wallpaper*'})
+	 break
+	 
+case 'hentai': 
+    memein = await kagApi.memeindo()
+	anu = await fetchJson(`https://api-gdr.herokuapp.com/api/nekohentai`)
+	buffer = await getBuffer(anu.result)
+	Pin.sendMessage(from, buffer, image, {quoted: mek, caption: 'hmm ️'})
+	break
+	 
+	 	
 case 'bts':
 	memein = await kagApi.memeindo()
 	buffer = await getBuffer(`https://lolhuman.herokuapp.com/api/random/bts?apikey=69bd42a244e197ad54548345`)
@@ -4091,7 +4113,7 @@ case 'bts':
                teks = body.slice(9)                 
                 anu = await getBuffer(`https://api.xteam.xyz/sticker/stickpack?q=spongebob&APIKEY=63b3e16b23026b82`)
                 buffer = await getBuffer(anu.result)
-                Pin.sendMessage(from, buffer, sticker, { quoted: mek })
+                Pin.sendMessage(from, buffer, image, { quoted: mek })
                 break
                 
          case 'btsfig':
@@ -4102,12 +4124,6 @@ case 'bts':
                 Pin.sendMessage(from, buffer, sticker, { quoted: mek })
                 break
 	 
-	
-case 'hentai':
-	memein = await kagApi.memeindo()
-	buffer = await getBuffer(`https://lolhuman.herokuapp.com/api/random2/hentai?apikey=73cea893c3a573384e52e0a6`)
-	Pin.sendMessage(from, buffer, image, {quoted: mek, caption: 'hmm ️'})
-	break
 
 	
 case 'imgmenu':
@@ -4142,7 +4158,8 @@ case 'outromenu':
 	buffer = await getBuffer(`https://lh3.googleusercontent.com/pw/ACtC-3dP4vCXZIFBV4zS4k9nqdUkOyJxcz4TBc79lzLsw2367fLe2Zpy7bmRYHqZPkzXGz1TMAEm09AdIJRHFWQBraPLxxuuw7WT9OkMheMTNDhAZwqWwkZObof3RdJB4aOjbKwpffsZDnfLEyyRFPSMhVPL=w480-h478-no?authuser=0`)
 	Pin.sendMessage(from, buffer, image, {quoted: mek, caption: '      🍒*OUTRO MENU*🍒\n\n ‣.nickff\n\n ‣.geradorcpf\n\n ‣.cep\n\n      🍒..........................🍒️'})
 	break  
-	
+
+
 case 'bannermenu':
 	memein = await kagApi.memeindo()
 	buffer = await getBuffer(`https://lh3.googleusercontent.com/pw/ACtC-3dP4vCXZIFBV4zS4k9nqdUkOyJxcz4TBc79lzLsw2367fLe2Zpy7bmRYHqZPkzXGz1TMAEm09AdIJRHFWQBraPLxxuuw7WT9OkMheMTNDhAZwqWwkZObof3RdJB4aOjbKwpffsZDnfLEyyRFPSMhVPL=w480-h478-no?authuser=0`)
@@ -4814,16 +4831,8 @@ case 'conselho':
      Pin.sendMessage(from, its, image, {quoted: mek, caption: randTeks})
      break
      
-  case 'play':   
-   play = body.slice(5)
-   anu = await fetchJson(`https://api.zeks.xyz/api/ytplaymp3?apikey=apivinz&q=${play}`)  
-   buffer = await getBuffer(anu.result.thumbnail) 
-   lagu = await getBuffer(anu.result.url_audio)
-   Pin.sendMessage(from, buffer, image, {quoted: mek, caption:'SUA MÚSICA ESTÁ SENDO BAIXADA🎶🎶'})   
-   Pin.sendMessage(from, lagu, audio, {mimetype: 'audio/mp4', filename: `${anu.title}.mp3`, quoted: mek})
-   break
-   
-    case 'play1':   
+  
+    case 'play':   
    play = body.slice(6)
    anu = await fetchJson(`https://api.xteam.xyz/dl/play?lagu=${play}&APIKEY=63b3e16b23026b82`)  
    buffer = await getBuffer(anu.thumbnail) 
@@ -4833,14 +4842,6 @@ case 'conselho':
    break
    
    
-    case 'play2':   
-   play = body.slice(6)
-   anu = await fetchJson(`https://videfikri.com/api/ytplayv2/?query=${play}`)
-   buffer = await getBuffer(anu.result.thumbnal)
-   lagu = await getBuffer(anu.result.url)
-   Pin.sendMessage(from, buffer, image, {quoted: mek, caption:'SUA MÚSICA ESTÁ SENDO BAIXADA 🎶🎶'})
-   Pin.sendMessage(from, lagu, audio, {mimetype: 'audio/mp4', filename: `${anu.title}.mp3`, quoted: mek})
-   break
    
  case 'gtvd':   
    play = body.slice(5)
@@ -4856,14 +4857,20 @@ case 'conselho':
    break
    
 case 'vid':
-   reply(mess.wait)
    play = body.slice(5)
-   anu = await fetchJson(`https://api.zeks.xyz/api/ytplaymp4?apikey=apivinz&q=${play}`)
-   if (anu.error) return reply(anu.error)
-   infomp3 = `*VIDEO ENCONTRADO!!!*\n‣ Título : ${anu.result.title}\n‣Tamanho : ${anu.result.size}\n\n*ESPERE UM POUQUINHO*`
-   buffer = await getBuffer(anu.result.thumbnail)
-   lagu = await getBuffer(anu.result.url_video)
-   Pin.sendMessage(from, buffer, image, {quoted: mek, caption: infomp3})
+   anu = await fetchJson(`https://videfikri.com/api/playmp4v2/?query=${play}`)   
+   buffer = await getBuffer(anu.result.imgUrl)
+   lagu = await getBuffer(anu.result.urlVideo)
+   Pin.sendMessage(from, buffer, image, {quoted: mek, caption:'SEU VÍDEO ESTÁ SENDO BAIXADO 🎬'})
+   Pin.sendMessage(from, lagu, video, {mimetype: 'video/mp4', filename: `${anu.title}.mp4`, quoted: mek})
+   break
+   
+ case 'vid1':
+   play = body.slice(5)
+   anu = await fetchJson(`https://api-gdr.herokuapp.com/api/ytplaymp4?q=${play}`)   
+   buffer = await getBuffer(anu.thumb)
+   lagu = await getBuffer(anu.url_video)
+   Pin.sendMessage(from, buffer, image, {quoted: mek, caption:'SEU VÍDEO ESTÁ SENDO BAIXADO 🎬'})
    Pin.sendMessage(from, lagu, video, {mimetype: 'video/mp4', filename: `${anu.title}.mp4`, quoted: mek})
    break
    
@@ -4872,7 +4879,7 @@ case 'vid':
    play = body.slice(8)
    anu = await fetchJson(`https://api.xteam.xyz/dl/ig?url=${play}&APIKEY=63b3e16b23026b82`)
    if (anu.error) return reply(anu.error) 
-   lagu = await getBuffer(anu.result.data)
+   lagu = await getBuffer(anu.type.data)
    Pin.sendMessage(from, lagu, video, {mimetype: 'video/mp4', quoted: mek})
    break
 
@@ -4884,7 +4891,7 @@ case 'ytmp3':
   reply(mess.wait)
   play = body.slice(7)
   if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply('Format link salah, gunakan link youtube')
-  try {
+  try {                    
   anu = await fetchJson(`https://api.zeks.xyz/api/ytmp3/2?url=${play}&apikey=${viKey}`)
   infomp3 = `*Audio Ditemukan!!!*\n‣ Judul : ${anu.result.title}\n‣ Source : ${anu.result.source}\n‣ Ukuran : ${anu.result.size}\n\n_Mengirim file silakan tunggu_\n\n_Jika video tidak muncul download sendiri menggunakan link dibawah_\n‣ *link* : ${anu.result.link}`
   buffer = await getBuffer(anu.result.thumb)
@@ -5074,10 +5081,10 @@ case 'ig':
   play = body.slice(4)
 
   try {         
-  
+                          
   anu = await fetchJson(`https://api.zeks.xyz/api/ig?url=${play}&apikey=apivinz`)
 
-  lagu = await getBuffer(anu.result)
+  lagu = await getBuffer(anu.result[0])
 
   Pin.sendMessage(from, lagu, video, {
 
@@ -5451,7 +5458,7 @@ mimetype: 'video/mp4', filename: `${anu.nameInfo}.mp4`, quoted: mek
 
 //--stiker maker
 
-				case 'stiker':
+	case 'stiker':
 
 				case 'sticker':
 
@@ -5543,7 +5550,7 @@ mimetype: 'video/mp4', filename: `${anu.nameInfo}.mp4`, quoted: mek
 
 								tipe = media.endsWith('.mp4') ? 'video' : 'gif'
 
-								reply(`❌ NÃO TÔ FAZENDO PORRA 😡`)
+								reply(`❌ Falha, no momento da conversão ${tipe} de stiker`)
 
 							})
 
@@ -5599,7 +5606,7 @@ mimetype: 'video/mp4', filename: `${anu.nameInfo}.mp4`, quoted: mek
 
 							fs.writeFileSync(ranp, buffer, (err) => {
 
-								if (err) return reply('❌ NÃO TÔ FAZENDO PORRA 😡.')
+								if (err) return reply('Falha, ocorreu um erro, tente novamente mais tarde.')
 
 							})
 
@@ -5674,7 +5681,6 @@ mimetype: 'video/mp4', filename: `${anu.nameInfo}.mp4`, quoted: mek
 					}
 
 					break
-
 
 
 //-- temp
@@ -7626,6 +7632,10 @@ case 'antisticker':
 			reply("roi, falando de mim?🥺❤️")
 	}
 			if (messagesC.includes("newton")){
+			Pin.updatePresence(from, Presence.composing)
+			reply("O que estão falando do meu dono,hein?️👀")
+	}
+		if (messagesC.includes("supra")){
 			Pin.updatePresence(from, Presence.composing)
 			reply("O que estão falando do meu dono,hein?️👀")
 	}
